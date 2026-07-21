@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: operacion-service
+  labels:
+    app: operacion-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: operacion-service
+  template:
+    metadata:
+      labels:
+        app: operacion-service
+    spec:
+      imagePullSecrets:
+        - name: dockerhub-credenciales # mi secret de las credenciales de dockerhub
+      containers:
+        - name: operacion-service
+          image: carlitossteven/operacion-service:v3
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8080
+          env:
+            - name: ConnectionStrings__ConexionDB #Tiene que ser el nombre que se pone en el appsettings.json de la api
+              valueFrom:
+                secretKeyRef:
+                  name: db-secret #NOMBRE DEL SECRETO
+                  key: DB_CONNECTION #NOMBRE DE LA LLAVE DENTRO DEL SECRETO
+            - name: Jwt__Secret
+              valueFrom:
+                secretKeyRef:
+                  name: db-secret #NOMBRE DEL SECRETO
+                  key: JWT_SECRET #NOMBRE DE LA LLAVE DENTRO DEL SECRETO

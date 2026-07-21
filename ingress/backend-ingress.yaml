@@ -1,0 +1,66 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: backend-ingress
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: localhost
+      http:
+        paths:
+          - path: /api/Sesion
+            pathType: Prefix
+            backend:
+              service:
+                name: sesion-service
+                port:
+                  number: 80
+          - path: /api/Permisos
+            pathType: Prefix
+            backend:
+              service:
+                name: permisos-service
+                port:
+                  number: 80
+          - path: /api/Catalogos
+            pathType: Prefix
+            backend:
+              service:
+                name: catalogos-service
+                port:
+                  number: 80
+          - path: /api/Recepcion
+            pathType: Prefix
+            backend:
+              service:
+                name: recepcion-service
+                port:
+                  number: 80
+          - path: /api/Captura
+            pathType: Prefix
+            backend:
+              service:
+                name: captura-service
+                port:
+                  number: 80
+          - path: /api/Operacion
+            pathType: Prefix
+            backend:
+              service:
+                name: operacion-service
+                port:
+                  number: 80
+          - path: /api/Consulta
+            pathType: Prefix
+            backend:
+              service:
+                name: consulta-service
+                port:
+                  number: 80
+          - path: /api/Reportes
+            pathType: Prefix
+            backend:
+              service:
+                name: reportes-service
+                port:
+                  number: 80

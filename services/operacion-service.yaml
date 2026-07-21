@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: operacion-service
+spec:
+  selector:
+    app: operacion-service
+  ports:
+    - port: 80 #Puerto del Service dentro del cluster
+      targetPort: 8080 #Puerto donde escucha el contenedor
